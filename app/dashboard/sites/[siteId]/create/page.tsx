@@ -148,6 +148,7 @@ export default function ArticleCreationRoute({
                 className="object-cover w-[350px] h-[300px] rounded-lg"
                 width={300}
                 height={300}
+                priority
               />
               <UploadDropzone
               className="border-none"

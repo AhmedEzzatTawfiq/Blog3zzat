@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Defaultimage from "@/public/default.png";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; 
 import Link from "next/link";
 
 async function getData(subDir: string) {
@@ -73,6 +73,7 @@ export default async function BlogIndexPage({
               className="rounded-t-lg object-cover w-full h-[200px]"
               width={400}
               height={200}
+              priority
             />
             <CardHeader>
               <CardTitle className="truncate">{item.title}</CardTitle>

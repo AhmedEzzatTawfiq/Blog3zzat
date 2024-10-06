@@ -13,7 +13,7 @@ import {
 import { redirect } from "next/navigation";
 
 async function getData(userId: string) {
-  const data = await prisma.subscription.findUnique({
+  const data = await prisma.subscription.findUnique({  
     where: {
       userId: userId,
     },
