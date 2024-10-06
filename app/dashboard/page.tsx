@@ -51,13 +51,14 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {sites.map((item) => (
             <Card key={item.id}>
-              <Image
+              {item.imageUrl ? <Image
                 src={item.imageUrl ?? Defaultimage}
                 alt={item.name}
                 className="rounded-t-lg object-cover w-full h-[200px]"
                 width={400}
                 height={200}
-              />
+              /> : 
+              <div className='w-[400px] h-[200px] bg-slate-200 rounded-lg animate-pulse'></div>}
               <CardHeader>
                 <CardTitle className="truncate">{item.name}</CardTitle>
                 <CardDescription className="line-clamp-3">

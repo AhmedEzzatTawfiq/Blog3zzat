@@ -63,14 +63,16 @@ export default async function SlugRoute({
       </div>
 
       <div className="relative m-auto mb-10 h-80 w-full max-w-screen-lg overflow-hidden md:mb-20 md:h-[450px] md:w-5/6 md:rounded-2xl lg:w-2/3">
-        <Image
+        {data.image ? <Image
           src={data.image}
           alt={data.title}
           width={1200}
           height={630}
           className="h-full w-full object-cover"
           priority
-        />
+        /> :
+        <div className='w-[1200px] h-[360px] bg-slate-200 rounded-lg animate-pulse'></div>
+}
       </div>
 
       <RenderArticle json={data.articleContent as JSONContent} />

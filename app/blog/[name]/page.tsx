@@ -44,12 +44,14 @@ async function getData(subDir: string) {
   return data;
 }
 
+
 export default async function BlogIndexPage({
   params,
 }: {
   params: { name: string };
 }) {
   const data = await getData(params.name);
+  
   return (
     <>
       <nav className="grid grid-cols-3 my-10">
@@ -67,14 +69,16 @@ export default async function BlogIndexPage({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {data.posts.map((item) => (
           <Card key={item.id}>
-            <Image
+            {item.image ? <Image
               src={item.image ?? Defaultimage}
               alt={item.title}
               className="rounded-t-lg object-cover w-full h-[200px]"
               width={400}
               height={200}
               priority
-            />
+            /> : 
+          <div className='w-[400px] h-[200px] bg-slate-200 rounded-lg animate-pulse'></div>
+        }
             <CardHeader>
               <CardTitle className="truncate">{item.title}</CardTitle>
               <CardDescription className="line-clamp-3">
