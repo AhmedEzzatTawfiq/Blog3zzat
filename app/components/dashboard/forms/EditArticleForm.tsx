@@ -22,8 +22,9 @@ import { JSONContent } from "novel";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { PostSchema } from "@/app/utils/zodSchemas";
-import { CreatePostAction, EditPostActions } from "@/app/utils/actions";
+import { CreatePostAction, EditPostActions, UpdateImage } from "@/app/utils/actions";
 import slugify from "react-slugify";
+import Link from "next/link";
 
 interface iAppProps {
   data: {
@@ -34,7 +35,7 @@ interface iAppProps {
     id: string;
     image: string;
   };
-  siteId: string;
+  siteId: string,
 }
 
 export function EditArticleForm({ data, siteId }: iAppProps) {
@@ -44,6 +45,7 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
   );
   const [slug, setSlugValue] = useState<undefined | string>(data.slug);
   const [title, setTitle] = useState<undefined | string>(data.title);
+  const [smallDescription, setDes] = useState<undefined | string>(data.smallDescription);
 
   const [lastResult, action] = useActionState(EditPostActions, undefined);
   const [form, fields] = useForm({
@@ -72,9 +74,6 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
     <Card className="mt-5">
       <CardHeader>
         <CardTitle>Article Details</CardTitle>
-        <CardDescription>
-          Lipsum dolor sit amet, consectetur adipiscing elit
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -124,9 +123,11 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
             <Textarea
               key={fields.smallDescription.key}
               name={fields.smallDescription.name}
-              defaultValue={data.smallDescription}
+              defaultValue={fields.smallDescription.initialValue}
               placeholder="Small Description for your blog article..."
               className="h-32"
+              onChange={(e) => setDes(e.target.value)}
+              value={smallDescription}
             />
             <p className="text-red-500 text-sm">
               {fields.smallDescription.errors}
@@ -142,14 +143,27 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
               defaultValue={fields.coverImage.initialValue}
               value={imageUrl}
             />
-            {imageUrl ? (
+            {imageUrl ? (<div className="flex justify-stretch">
               <Image
                 src={imageUrl}
                 alt="Uploaded Image"
-                className="object-cover w-[200px] h-[200px] rounded-lg"
-                width={200}
-                height={200}
+                className="object-cover w-[350px] h-[300px] rounded-lg"
+                width={300}
+                height={300}
               />
+              <UploadDropzone
+              className="border-none"
+                onClientUploadComplete={(res) => {
+                  setImageUrl(res[0].url);
+                  toast.success("Image has been uploaded");
+                }}
+                endpoint="imageUploader"
+                onUploadError={() => {
+                  toast.error("Something went wrong...");
+                }}
+              />
+              
+              </div>
             ) : (
               <UploadDropzone
                 onClientUploadComplete={(res) => {

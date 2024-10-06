@@ -141,26 +141,39 @@ export default function ArticleCreationRoute({
                 defaultValue={fields.coverImage.initialValue}
                 value={imageUrl}
               />
-              {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt="Uploaded Image"
-                  className="object-cover w-[200px] h-[200px] rounded-lg"
-                  width={200}
-                  height={200}
-                />
-              ) : (
-                <UploadDropzone
-                  onClientUploadComplete={(res) => {
-                    setImageUrl(res[0].url);
-                    toast.success("Image has been uploaded");
-                  }}
-                  endpoint="imageUploader"
-                  onUploadError={() => {
-                    toast.error("Something went wrong...");
-                  }}
-                />
-              )}
+              {imageUrl ? (<div className="flex justify-stretch">
+              <Image
+                src={imageUrl}
+                alt="Uploaded Image"
+                className="object-cover w-[350px] h-[300px] rounded-lg"
+                width={300}
+                height={300}
+              />
+              <UploadDropzone
+              className="border-none"
+                onClientUploadComplete={(res) => {
+                  setImageUrl(res[0].url);
+                  toast.success("Image has been uploaded");
+                }}
+                endpoint="imageUploader"
+                onUploadError={() => {
+                  toast.error("Something went wrong...");
+                }}
+              />
+              
+              </div>
+            ) : (
+              <UploadDropzone
+                onClientUploadComplete={(res) => {
+                  setImageUrl(res[0].url);
+                  toast.success("Image has been uploaded");
+                }}
+                endpoint="imageUploader"
+                onUploadError={() => {
+                  toast.error("Something went wrong...");
+                }}
+              />
+            )}
 
               <p className="text-red-500 text-sm">{fields.coverImage.errors}</p>
             </div>

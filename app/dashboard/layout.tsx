@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import logo from "@/public/logos/logo.svg"
+import logo from "@/public/logo.png"
 import Image from "next/image";
 import { CircleUser, DollarSign, Globe, Home } from "lucide-react";
 import { DashboardItems } from "../components/dashboard/DashboardItems";

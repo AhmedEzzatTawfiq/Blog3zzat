@@ -64,7 +64,7 @@ export function PricingTable() {
 
       <div className="grid grid-cols-1 gap-8 mt-16 lg:grid-cols-2">
         {PricingPlans.map((item) => (
-          <Card key={item.id} className={item.id === 1 ? 'border-primary' : ''}>
+          <Card key={item.id} className={item.id === 1 ? "border-primary" : ""}>
             <CardHeader>
               <CardTitle>
                 {item.id === 1 ? (
@@ -111,5 +111,5 @@ export function PricingTable() {
         ))}
       </div>
     </>
-  )
+  );
 }
