@@ -58,14 +58,14 @@ export default async function SitesRoute() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {data.map((item) => (
             <Card key={item.id}>
-              {item.imageUrl ? <Image
+              {item.imageUrl || Defaultimage ? <Image
                 src={item.imageUrl ?? Defaultimage}
                 alt={item.name}
                 className="rounded-t-lg object-cover w-full h-[200px]"
                 width={400}
                 height={200}
               /> :
-              <div className='w-[400px] h-[200px] bg-slate-200 rounded-lg animate-pulse'></div>
+              <div className='w-[400px] h-[200px] bg-slate-200 rounded-t-lg animate-pulse'></div>
 }
               <CardHeader>
                 <CardTitle className="truncate">{item.name}</CardTitle>
