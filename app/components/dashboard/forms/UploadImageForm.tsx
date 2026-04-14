@@ -1,6 +1,6 @@
 "use client";
 
-import { UploadDropzone } from "@/app/utils/UploadthingComponents";
+import { ImageKitUpload } from "@/app/components/dashboard/ImageKitUpload";
 import {
   Card,
   CardContent,
@@ -39,14 +39,9 @@ export function UploadImageForm({ siteId }: iAppProps) {
             className="size-[200px] object-cover rounded-lg"
           />
         ) : (
-          <UploadDropzone
-            endpoint="imageUploader"
-            onClientUploadComplete={(res) => {
-              setImageUrl(res[0].url);
-              toast.success("Image has been uploaded");
-            }}
-            onUploadError={() => {
-              toast.error("Something went wrong.");
+          <ImageKitUpload
+            onUploadComplete={(url) => {
+              setImageUrl(url);
             }}
           />
         )}

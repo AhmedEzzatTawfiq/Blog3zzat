@@ -1,7 +1,7 @@
 "use client";
 
 import TailwindEditor from "@/app/components/dashboard/EditorWrapper";
-import { UploadDropzone } from "@/app/utils/UploadthingComponents";
+import { ImageKitUpload } from "@/app/components/dashboard/ImageKitUpload";
 import { PostSchema } from "@/app/utils/zodSchemas";
 import { Button } from "@/components/ui/button";
 import {
@@ -142,39 +142,29 @@ export default function ArticleCreationRoute({
                 value={imageUrl}
               />
               {imageUrl ? (<div className="flex justify-stretch">
-              <Image
-                src={imageUrl}
-                alt="Uploaded Image"
-                className="object-cover w-[350px] h-[300px] rounded-lg"
-                width={300}
-                height={300}
-                priority
-              />
-              <UploadDropzone
-              className="border-none"
-                onClientUploadComplete={(res) => {
-                  setImageUrl(res[0].url);
-                  toast.success("Image has been uploaded");
-                }}
-                endpoint="imageUploader"
-                onUploadError={() => {
-                  toast.error("Something went wrong...");
-                }}
-              />
-              
+                <Image
+                  src={imageUrl}
+                  alt="Uploaded Image"
+                  className="object-cover w-[350px] h-[300px] rounded-lg"
+                  width={300}
+                  height={300}
+                  priority
+                />
+                <ImageKitUpload
+                  className="border-none"
+                  onUploadComplete={(url) => {
+                    setImageUrl(url);
+                  }}
+                />
+
               </div>
-            ) : (
-              <UploadDropzone
-                onClientUploadComplete={(res) => {
-                  setImageUrl(res[0].url);
-                  toast.success("Image has been uploaded");
-                }}
-                endpoint="imageUploader"
-                onUploadError={() => {
-                  toast.error("Something went wrong...");
-                }}
-              />
-            )}
+              ) : (
+                <ImageKitUpload
+                  onUploadComplete={(url) => {
+                    setImageUrl(url);
+                  }}
+                />
+              )}
 
               <p className="text-red-500 text-sm">{fields.coverImage.errors}</p>
             </div>

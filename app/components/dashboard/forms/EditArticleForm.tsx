@@ -1,6 +1,6 @@
 "use client";
 
-import { UploadDropzone } from "@/app/utils/UploadthingComponents";
+import { ImageKitUpload } from "@/app/components/dashboard/ImageKitUpload";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -152,28 +152,18 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
                 height={300}
                 priority
               />
-              <UploadDropzone
-              className="border-none"
-                onClientUploadComplete={(res) => {
-                  setImageUrl(res[0].url);
-                  toast.success("Image has been uploaded");
-                }}
-                endpoint="imageUploader"
-                onUploadError={() => {
-                  toast.error("Something went wrong...");
+              <ImageKitUpload
+                className="border-none"
+                onUploadComplete={(url) => {
+                  setImageUrl(url);
                 }}
               />
-              
-              </div>
+
+            </div>
             ) : (
-              <UploadDropzone
-                onClientUploadComplete={(res) => {
-                  setImageUrl(res[0].url);
-                  toast.success("Image has been uploaded");
-                }}
-                endpoint="imageUploader"
-                onUploadError={() => {
-                  toast.error("Something went wrong...");
+              <ImageKitUpload
+                onUploadComplete={(url) => {
+                  setImageUrl(url);
                 }}
               />
             )}

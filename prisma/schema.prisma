@@ -24,13 +24,13 @@ model User {
   createdAt DateTime @default(now())
 
   Site  Site[]
-  posts Post[]
+  posts Post[]  
 
   Subscription Subscription?
 }
 
 model Site {
-  id           String   @id @default(uuid())
+  id           String   @id @default(uuid())     
   name         String
   description  String
   subdirectory String   @unique
