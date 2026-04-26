@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import logo from "@/public/logo.png"
-import Image from "next/image";
-import { CircleUser, DollarSign, Globe, Home } from "lucide-react";
+import Logo from "../components/shared/Logo";
+import { AlertCircleIcon, CircleUser, DollarSign, Globe, Home } from "lucide-react";
 import { DashboardItems } from "../components/dashboard/DashboardItems";
 import { ThemeToggle } from "../components/dashboard/ThemeToggle";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -21,11 +20,16 @@ export const navLinks = [
     href: '/dashboard/sites',
     icon: Globe,
   },
-  {
-    name: "Pricing",
-    href: "/dashboard/pricing",
-    icon: DollarSign,
-  }
+  // {
+  //   name: 'Articles',
+  //   href: '/dashboard/articles',
+  //   icon: AlertCircleIcon,
+  // },
+  // {
+  //   name: "Pricing",
+  //   href: "/dashboard/pricing",
+  //   icon: DollarSign,
+  // }
 ]
 
 
@@ -36,10 +40,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href='/' className="flex items-center gap-2 font-semibold">
-              <Image src={logo} alt="logo" className="size-8" />
-              <h3 className="text-2xl">
-                Blog<span className="text-primary">3zzat</span>
-              </h3>
+              <Logo />
             </Link>
           </div>
           <div className="flex-1 items-start px-2 font-medium lg:px-4">
@@ -50,28 +51,28 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
       <div className="flex flex-col">
-      <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-        <div className="ml-auto flex items-center gap-x-5">
-          <ThemeToggle />
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          <div className="ml-auto flex items-center gap-x-5">
+            <ThemeToggle />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='secondary' size='icon' className="rounded-full">
-                <CircleUser />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <LogoutLink>Logout</LogoutLink>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-      <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-        {children}
-        <Toaster richColors closeButton />
-      </main>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='secondary' size='icon' className="rounded-full">
+                  <CircleUser />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <LogoutLink>Logout</LogoutLink>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </header>
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          {children}
+          <Toaster richColors closeButton />
+        </main>
       </div>
     </div>
   )

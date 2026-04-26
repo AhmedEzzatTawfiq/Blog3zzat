@@ -23,26 +23,26 @@ interface iAppProps {
 export const PricingPlans: iAppProps[] = [
   {
     id: 0,
-    cardTitle: "Freelancer",
-    cardDescription: "The best pricing plan for people starting out.",
+    cardTitle: "Developer",
+    cardDescription: "Perfect for individual developers starting their blog.",
     benefits: [
-      "1 Site",
-      "Up to 1000 Visitors",
-      "Up to 1000 Visitors",
-      "Up to 1000 Visitors",
+      "1 Blog Site",
+      "Unlimited Articles",
+      "Code Syntax Highlighting",
+      "Markdown Editor",
     ],
     priceTitle: "Free",
   },
   {
     id: 1,
-    cardTitle: "Startup",
-    cardDescription: "The best pricing plan for professionals.",
+    cardTitle: "Pro",
+    cardDescription: "For professional developers and teams.",
     priceTitle: "$29",
     benefits: [
-      "Unlimited Sites",
-      "Unimlited Visitors",
-      "Unimlited Visitors",
-      "Unimlited Visitors",
+      "Unlimited Blog Sites",
+      "Unlimited Articles",
+      "Custom Domain",
+      "Priority Support",
     ],
   },
 ];
@@ -53,13 +53,12 @@ export function PricingTable() {
       <div className="max-w-3xl mx-auto text-center">
         <p className="font-semibold text-primary">Pricing</p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
-          Pricing Plans for everyone and every budget!
+          Simple pricing for developers
         </h1>
       </div>
 
       <p className="mx-auto mt-6 max-w-2xl text-center leading-tight text-muted-foreground">
-        Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et quasi
-        iusto modi velit ut non voluptas in. Explicabo id ut laborum.
+        Start writing for free, upgrade when you need more. No hidden fees, cancel anytime.
       </p>
 
       <div className="grid grid-cols-1 gap-8 mt-16 lg:grid-cols-2">
@@ -69,7 +68,7 @@ export function PricingTable() {
               <CardTitle>
                 {item.id === 1 ? (
                   <div className="flex items-center justify-between">
-                    <h3 className="text-primary">Startup</h3>
+                    <h3 className="text-primary">Pro</h3>
 
                     <p className="rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold leading-5 text-primary">
                       Most popular

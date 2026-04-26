@@ -2,27 +2,27 @@ import { CloudRain } from "lucide-react";
 
 const features = [
   {
-    name: "Sign up for free",
+    name: "Code Syntax Highlighting",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+      "Beautiful syntax highlighting for all major programming languages. Your code snippets will look professional and easy to read.",
     icon: CloudRain,
   },
   {
-    name: "Balzing fast",
+    name: "Markdown Editor",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+      "Write your articles in Markdown with our powerful editor. Supports tables, code blocks, and rich text formatting.",
     icon: CloudRain,
   },
   {
-    name: "Super secure with Kinde",
+    name: "Secure Authentication",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+      "Built-in authentication with Kinde. Your account and content are secure with industry-standard security practices.",
     icon: CloudRain,
   },
   {
-    name: "Easy to use",
+    name: "Fast Performance",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+      "Optimized for speed with Next.js and Edge caching. Your articles load instantly for readers worldwide.",
     icon: CloudRain,
   },
 ];
@@ -31,13 +31,12 @@ export function Features() {
   return (
     <div className="py-24 sm:py-32">
       <div className="max-w-2xl mx-auto lg:text-center">
-        <p className="font-semibold leading-7 text-primary">Blog Faster</p>
+        <p className="font-semibold leading-7 text-primary">Write Code</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          Get your blog up and running in minutes
+          Everything you need to write programming articles
         </h1>
         <p className="mt-6 text-base leading-snug text-muted-foreground">
-          Right here you can create a blog in minutes. We make it easy for you
-          to create a blog in minutes. The blog is very fast and easy to create.
+          Focus on writing great technical content while we handle the rest. Syntax highlighting, markdown support, and fast performance out of the box.
         </p>
       </div>
 
