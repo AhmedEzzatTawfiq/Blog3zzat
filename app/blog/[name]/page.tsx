@@ -55,40 +55,40 @@ export default async function BlogIndexPage({
   return (
     <>
       <nav className="my-10 flex justify-between">
-        <Logo className="flex self-start" />
+        <Link href="/dashboard">
+          <Logo className="flex self-start cursor-pointer" />
+        </Link>
         <ThemeToggle />
       </nav>
 
       <div className="flex flex-col gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight">{data.name}</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">{data.name}</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {data.posts.map((item) => (
-            <Card key={item.id}>
-              {item.image ? <Image
-                src={item.image ?? Defaultimage}
-                alt={item.title}
-                className="rounded-t-lg object-cover w-full h-[200px]"
-                width={400}
-                height={200}
-                priority
-              /> :
-                <div className='w-[400px] h-[200px] bg-slate-200 rounded-lg animate-pulse'></div>
-              }
-              <CardHeader>
-                <CardTitle className="truncate">{item.title}</CardTitle>
-                <CardDescription className="line-clamp-3">
-                  {item.smallDescription}
-                </CardDescription>
-              </CardHeader>
+            <Link key={item.id} href={`/blog/${params.name}/${item.slug}`}>
+              <Card className="cursor-pointer hover:border-primary transition-colors flex flex-col h-full">
+                {item.image ? <Image
+                  src={item.image ?? Defaultimage}
+                  alt={item.title}
+                  className="rounded-t-lg object-cover w-full h-[200px]"
+                  width={400}
+                  height={200}
+                  priority
+                /> :
+                  <div className='w-[400px] h-[200px] bg-slate-200 rounded-lg animate-pulse'></div>
+                }
+                <CardHeader>
+                  <CardTitle className="truncate">{item.title}</CardTitle>
+                  <CardDescription className="line-clamp-3">
+                    {item.smallDescription}
+                  </CardDescription>
+                </CardHeader>
 
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href={`/blog/${params.name}/${item.slug}`}>
-                    Read more
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+                <CardFooter className="mt-auto">
+                  <p className="text-sm text-primary font-medium">Read more →</p>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

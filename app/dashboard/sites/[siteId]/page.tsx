@@ -70,6 +70,7 @@ async function getData(userId: string, siteId: string) {
           title: true,
           createdAt: true,
           id: true,
+          slug: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -97,23 +98,23 @@ export default async function SiteIdRoute({
 
   return (
     <>
-      <div className="flex w-full justify-end gap-x-4">
-        <Button asChild variant="secondary">
+      <div className="flex flex-col sm:flex-row w-full justify-end gap-2 sm:gap-x-4">
+        <Button asChild variant="secondary" className="w-full sm:w-auto">
           <Link href={`/blog/${data?.subdirectory}`}>
-            <Book className="size-4 mr-2" />
-            View Blog
+            <Book className="size-4 mr-2 shrink-0" />
+            <span className="whitespace-nowrap">View Blog</span>
           </Link>
         </Button>
-        <Button asChild variant="secondary">
+        <Button asChild variant="secondary" className="w-full sm:w-auto">
           <Link href={`/dashboard/sites/${params.siteId}/settings`}>
-            <Settings className="size-4 mr-2" />
-            Settings
+            <Settings className="size-4 mr-2 shrink-0" />
+            <span className="whitespace-nowrap">Settings</span>
           </Link>
         </Button>
-        <Button asChild>
+        <Button asChild className="w-full sm:w-auto">
           <Link href={`/dashboard/sites/${params.siteId}/create`}>
-            <PlusCircle className="size-4 mr-2" />
-            Create Article
+            <PlusCircle className="size-4 mr-2 shrink-0" />
+            <span className="whitespace-nowrap">Create Article</span>
           </Link>
         </Button>
       </div>
@@ -135,76 +136,86 @@ export default async function SiteIdRoute({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Image</TableHead>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Created At</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {data.posts.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>
-                        <Image
-                          src={item.image}
-                          width={64}
-                          height={64}
-                          alt="Article Cover Image"
-                          className="size-16 rounded-md object-cover"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        {item.title}
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant="outline"
-                          className="bg-green-500/10 text-green-500"
-                        >
-                          Published
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        {new Intl.DateTimeFormat("en-US", {
-                          dateStyle: "medium",
-                        }).format(item.createdAt)}
-                      </TableCell>
-
-                      <TableCell className="text-end">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button size="icon" variant="ghost">
-                              <MoreHorizontal className="size-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem asChild>
-                              <Link
-                                href={`/dashboard/sites/${params.siteId}/${item.id}`}
-                              >
-                                Edit
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                              <Link
-                                href={`/dashboard/sites/${params.siteId}/${item.id}/delete`}
-                              >
-                                Delete
-                              </Link>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
+              <div className="overflow-x-auto -mx-4 sm:-mx-6 px-4 sm:px-6">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-24">Image</TableHead>
+                      <TableHead>Title</TableHead>
+                      <TableHead className="hidden sm:table-cell">Status</TableHead>
+                      <TableHead className="hidden sm:table-cell">Created At</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {data.posts.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell>
+                          <Image
+                            src={item.image}
+                            width={64}
+                            height={64}
+                            alt="Article Cover Image"
+                            className="size-16 rounded-md object-cover"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          {item.title}
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">
+                          <Badge
+                            variant="outline"
+                            className="bg-green-500/10 text-green-500"
+                          >
+                            Published
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">
+                          {new Intl.DateTimeFormat("en-US", {
+                            dateStyle: "medium",
+                          }).format(item.createdAt)}
+                        </TableCell>
+
+                        <TableCell className="text-end">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button size="icon" variant="ghost">
+                                <MoreHorizontal className="size-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem asChild>
+                                <Link
+                                  href={`/blog/${data?.subdirectory}/${item.slug}`}
+                                  target="_blank"
+                                >
+                                  View Article
+                                </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem asChild>
+                                <Link
+                                  href={`/dashboard/sites/${params.siteId}/${item.id}`}
+                                >
+                                  Edit
+                                </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem asChild>
+                                <Link
+                                  href={`/dashboard/sites/${params.siteId}/${item.id}/delete`}
+                                >
+                                  Delete
+                                </Link>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </div>

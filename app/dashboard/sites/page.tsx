@@ -55,9 +55,9 @@ export default async function SitesRoute() {
           href="/dashboard/sites/new"
         />
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 cursor-pointer">
           {data.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} className="flex flex-col h-full">
               {item.imageUrl || Defaultimage ? <Image
                 src={item.imageUrl ?? Defaultimage}
                 alt={item.name}
@@ -65,8 +65,8 @@ export default async function SitesRoute() {
                 width={400}
                 height={200}
               /> :
-              <div className='w-[400px] h-[200px] bg-slate-200 rounded-t-lg animate-pulse'></div>
-}
+                <div className='w-[400px] h-[200px] bg-slate-200 rounded-t-lg animate-pulse'></div>
+              }
               <CardHeader>
                 <CardTitle className="truncate">{item.name}</CardTitle>
                 <CardDescription className="line-clamp-3">
@@ -74,7 +74,7 @@ export default async function SitesRoute() {
                 </CardDescription>
               </CardHeader>
 
-              <CardFooter>
+              <CardFooter className="mt-auto">
                 <Button asChild className="w-full">
                   <Link href={`/dashboard/sites/${item.id}`}>
                     View Articles

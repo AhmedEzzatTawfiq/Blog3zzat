@@ -141,11 +141,11 @@ export default function ArticleCreationRoute({
                 defaultValue={fields.coverImage.initialValue}
                 value={imageUrl}
               />
-              {imageUrl ? (<div className="flex justify-stretch">
+              {imageUrl ? (<div className="flex flex-col gap-4 items-center">
                 <Image
                   src={imageUrl}
                   alt="Uploaded Image"
-                  className="object-cover w-[350px] h-[300px] rounded-lg"
+                  className="object-cover w-full max-w-[350px] h-auto rounded-lg"
                   width={300}
                   height={300}
                   priority

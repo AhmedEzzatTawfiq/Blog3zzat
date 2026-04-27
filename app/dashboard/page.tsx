@@ -37,28 +37,28 @@ async function getData(userId: string) {
     })
   ])
 
-  return {sites, articles};
+  return { sites, articles };
 
 }
 
 export default async function DashboardPage() {
   const user = await requireUser();
-  const {sites, articles} = await getData(user.id)
+  const { sites, articles } = await getData(user.id)
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-5">Your Sites</h1>
       {sites.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {sites.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} className="flex flex-col h-full">
               {item.imageUrl || Defaultimage ? <Image
                 src={item.imageUrl ?? Defaultimage}
                 alt={item.name}
                 className="rounded-t-lg object-cover w-full h-[200px]"
                 width={400}
                 height={200}
-              /> : 
-              <div className='w-[400px] h-[200px] bg-slate-200 rounded-t-lg animate-pulse'></div>}
+              /> :
+                <div className='w-[400px] h-[200px] bg-slate-200 rounded-t-lg animate-pulse'></div>}
               <CardHeader>
                 <CardTitle className="truncate">{item.name}</CardTitle>
                 <CardDescription className="line-clamp-3">
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
                 </CardDescription>
               </CardHeader>
 
-              <CardFooter>
+              <CardFooter className="mt-auto">
                 <Button asChild className="w-full">
                   <Link href={`/dashboard/sites/${item.id}`}>
                     View Articles
@@ -89,29 +89,27 @@ export default async function DashboardPage() {
       {articles.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {articles.map((item) => (
-            <Card key={item.id}>
-              <Image
-                src={item.image ?? Defaultimage}
-                alt={item.title}
-                className="rounded-t-lg object-cover w-full h-[200px]"
-                width={400}
-                height={200}
-              />
-              <CardHeader>
-                <CardTitle className="truncate">{item.title}</CardTitle>
-                <CardDescription className="line-clamp-3">
-                  {item.smallDescription}
-                </CardDescription>
-              </CardHeader>
+            <Link key={item.id} href={`/dashboard/sites/${item.siteId}/${item.id}`}>
+              <Card className="flex flex-col h-full cursor-pointer hover:border-primary transition-colors">
+                <Image
+                  src={item.image ?? Defaultimage}
+                  alt={item.title}
+                  className="rounded-t-lg object-cover w-full h-[200px]"
+                  width={400}
+                  height={200}
+                />
+                <CardHeader>
+                  <CardTitle className="truncate">{item.title}</CardTitle>
+                  <CardDescription className="line-clamp-3">
+                    {item.smallDescription}
+                  </CardDescription>
+                </CardHeader>
 
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href={`/dashboard/sites/${item.siteId}/${item.id}`}>
-                    Edit Article
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+                <CardFooter className="mt-auto">
+                  <p className="text-sm text-primary font-medium">Edit Article →</p>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       ) : (

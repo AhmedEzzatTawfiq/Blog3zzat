@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import Logo from "../components/shared/Logo";
-import { AlertCircleIcon, CircleUser, DollarSign, Globe, Home } from "lucide-react";
+import { AlertCircleIcon, CircleUser, DollarSign, Globe, Home, Menu } from "lucide-react";
 import { DashboardItems } from "../components/dashboard/DashboardItems";
 import { ThemeToggle } from "../components/dashboard/ThemeToggle";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -52,6 +52,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          {/* Logo - visible on all screens */}
+          <Link href="/dashboard" className="md:hidden">
+            <Logo />
+          </Link>
+
           <div className="ml-auto flex items-center gap-x-5">
             <ThemeToggle />
 
@@ -67,6 +72,27 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Mobile Menu - Only visible on small screens, at the end right */}
+            <div className="md:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {navLinks.map((link) => (
+                    <DropdownMenuItem key={link.href} asChild>
+                      <Link href={link.href} className="flex items-center gap-2 cursor-pointer">
+                        <link.icon className="h-4 w-4" />
+                        {link.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
